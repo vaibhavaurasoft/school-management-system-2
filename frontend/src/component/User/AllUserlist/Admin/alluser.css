@@ -1,0 +1,126 @@
+/* .mianalladminlist {
+    background: rgb(234, 231, 231);
+}
+
+.leftsidebar {
+  
+    background: white;
+        box-shadow: 20px 10px 10px rgba(0, 0, 0, 0.074);
+
+
+}
+.aminimage {
+  width: 70px;
+  height: 70px;
+  border-radius: 100px;
+}
+.adminnamedetails {
+  padding: 10px;
+  padding-top: 20px;
+}
+
+
+.profile {
+  gap: 80px;
+
+    background: white;
+    box-shadow: 20px 10px 10px rgba(0, 0, 0, 0.074);
+
+}
+.userimage {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  transition: all 1s ease
+}
+
+.userimage:hover {
+  scale: 1.2;
+  border-radius: 10px;
+
+} */
+/* alluser.css */
+
+
+.mianalladminlist1 {
+  margin-top: 20px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.leftsidebar2 {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.alladminlist2 {
+  padding: 10px;
+}
+
+.alladminlist2 h3 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.detailacard2 {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+    .adminimage2 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.adminnamedetails2 h5 {
+    color: #333;
+    font-size: 16px;
+    margin: 0;
+    padding: 2px;
+    }
+
+.profile2 {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.userimage2 {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.tablefirst2 {
+  font-weight: bold;
+  width: 200px;
+}
+
+.profile2 table td {
+  padding: 10px 0;
+  color: #333;
+  
+}
+
+table td:first-child {
+  color: #777;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.detailacard2 {
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+
+.detailacard2:hover {
+  background: #cec4c4;
+  scale: 1.05;
+}

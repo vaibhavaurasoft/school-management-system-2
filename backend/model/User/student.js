@@ -52,10 +52,9 @@ const StudentSchema = new mongoose.Schema({
   image: {
     type: String,
   },
-  studentID: {
+  rollnumber: {
     type: String,
-    unique: [true, "this student is already exist"],
-    required: [true, "Please enter an studentId"],
+    unique: [true, "this roll number is already exist"],
   },
 
   section: {

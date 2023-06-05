@@ -4,29 +4,39 @@ const Admin = require("../../model/User/admin");
 const ErrorHandler = require("../../utils/errorHandel");
 const sendToken = require("../../utils/jwtToken");
 const ApiFeatures = require("../../utils/apifeature");
+const checkPostBody = require("../../utils/QueryCheck");
 
 // create user
 const AddUser = TryCatch(async (req, res, next) => {
+  const role = req.user.role;
+  if (role === "super admin") {
+    await checkPostBody(["email", "password"], req);
+  } else if (role === "admin") {
+    await checkPostBody(["email", "password"], req);
+  } else if (role === "teacher") {
+    await checkPostBody(["email", "password"], req);
+  }
   const user = await User.create(req.body);
-  
+
   res.status(201).json({
     success: true,
     user,
   });
 });
+
 // get user by id
 const UserbyId = TryCatch(async (req, res, next) => {
   const user = await User.findById(req.params.id);
   const user2 = await Admin.findById(req.params.id);
-  if (!user && !user2 ) {
+  if (!user && !user2) {
     return next(new ErrorHandler("user not found", 404));
   }
   res.status(200).json({
     success: true,
     user,
-    user2
-  })
-})
+    user2,
+  });
+});
 
 // get all list
 const AllUser = TryCatch(async (req, res) => {
@@ -36,7 +46,7 @@ const AllUser = TryCatch(async (req, res) => {
     const data = await User.find(query);
     const admin = await Admin.find(query);
     const totalUser = data.length;
-    res.status(200).json({ totalUser: totalUser, data , admin });
+    res.status(200).json({ totalUser: totalUser, data, admin });
   }
 
   //  for admin / owner
@@ -184,5 +194,5 @@ module.exports = {
   DeleteUser,
   LogOut,
   UserDetails,
-  UserbyId
+  UserbyId,
 };

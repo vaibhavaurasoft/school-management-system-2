@@ -40,20 +40,22 @@ img {
   border-radius: 20px;
 } */
 
+:root {
+  --main-color: #287ba2; /* Define the color variable and assign a value */
+}
+
 .leftSideBar {
-  background: rgb(202, 181, 21);
+  background:var(--main-color) ;
   height: 100vh;
 }
 h2 {
-  text-shadow: 10px 10px 10px rgb(0, 0, 0);
+  text-shadow: 1px 1px 1px rgb(0, 0, 0);
   
 }
 input {
   padding: 20px;
   height: 20px;
-  width: 400px;
-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.200);
-  /* background: none; */
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.200);
 }
 .inputfiled{
   margin: 10px;
@@ -61,7 +63,7 @@ box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.200);
 .LoginBtn{
   width: 100px;
   height: 40px;
-  background: yellow;
+  background: var(--main-color);
   border-radius: 10px 10px;
   transition: all 0.6s  ease-in-out ;
   border: none;

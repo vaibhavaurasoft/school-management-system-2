@@ -1,41 +1,43 @@
 const experss = require("express");
 const router = experss.Router();
 const auth = require("../../middelwear/Auth");
-const AdminData = require("../../controller/superAdmin/addadmin");
+// const AdminData = require("../../controller/superAdmin/addadmin");
+const Data = require("../../controller/userController/User")
+
 
 // add admin
 router.route("/addadmin").post(
     auth.isAuthenticateUser,
     auth.authorizeRole("superadmin"),
-    AdminData.AddAdmin
+    Data.AddUser
 )
 
 // all admin
 router.route("/alladmin").get(
     auth.isAuthenticateUser,
     auth.authorizeRole("superadmin"),
-    AdminData.Alladmin
+    Data.AllUser
 )
   
 // single admin
 router.route("/singleadmin/:id").get(
     auth.isAuthenticateUser,
     auth.authorizeRole("superadmin"),
-    AdminData.Singleadmin
+    Data.UserDetails
 )
 
 // update admin
 router.route("/updateadmin/:id").put(
     auth.isAuthenticateUser,
     auth.authorizeRole("superadmin"),
-    AdminData.Updateadmin
+    Data.UpdateUser
 )
 
 // delete admin
 router.route("/deleteadmin/:id").delete(
     auth.isAuthenticateUser,
     auth.authorizeRole("superadmin"),
-    AdminData.Deleteadmin
+    Data.DeleteUser
 )
 
 module.exports = router;

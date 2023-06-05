@@ -7,6 +7,7 @@ const Users = new mongoose.Schema({
   // Common fields
   name: {
     type: String,
+    required: [true, "Please enter a name"],
   },
   email: {
     type: String,
