@@ -96,6 +96,6 @@ AdminSchema.methods.comparePassword = async function (enterpassword) {
   return await bcryptJS.compare(enterpassword, this.password);
 };
 
-const Owner = mongoose.model("Admin", AdminSchema);
+// const Owner = mongoose.model("Admin", AdminSchema);
 
-module.exports = Owner;
+// module.exports = Owner;

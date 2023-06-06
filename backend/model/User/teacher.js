@@ -116,4 +116,4 @@ PrincipalSchema.methods.comparePassword = async function (enterpassword) {
   return await bcryptJS.compare(enterpassword, this.password);
 };
 
-module.exports = mongoose.model("/Principal", PrincipalSchema);
+// module.exports = mongoose.model("/Principal", PrincipalSchema);

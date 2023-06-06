@@ -11,6 +11,7 @@ const Users = new mongoose.Schema({
   },
   email: {
     type: String,
+    required: [true, "Please Email Id"],
     unique: true,
     validate: [validator.isEmail, "Please enter a valid email"],
   },
@@ -48,16 +49,15 @@ const Users = new mongoose.Schema({
   financialInformation: {
     type: String,
   },
-  references: {
-    type: [String],
-  },
+
   CreateByuser: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
   schoolId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "School",
+    ref: "Schools",
+    required: true
   },
   createdAt: {
     type: Date,
@@ -72,17 +72,17 @@ const Users = new mongoose.Schema({
   previousSchools: {
     type: String,
   },
-  nationality: {
-    type: String,
-    default: "indian",
-  },
+  // nationality: {
+  //   type: String,
+  //   default: "indian",
+  // },
   image: {
     type: String,
   },
-  studentID: {
-    type: String,
-    unique: true,
-  },
+  // studentID: {
+  //   type: String,
+  //   unique: true,
+  // },
   section: {
     type: Number,
   },
@@ -95,15 +95,15 @@ const Users = new mongoose.Schema({
   medical: {
     deses: String,
   },
-  enrollmentDate: {
-    type: Date,
-    default: Date.now,
-  },
-  subjects: [
-    {
-      name: String,
-    },
-  ],
+  // enrollmentDate: {
+  //   type: Date,
+  //   default: Date.now,
+  // },
+  // subjects: [
+  //   {
+  //     name: String,
+  //   },
+  // ],
   dateOfBirth: {
     type: Date,
   },
@@ -120,10 +120,10 @@ const Users = new mongoose.Schema({
   experience: {
     type: Number,
   },
-  joiningDate: {
-    type: Date,
-    default: Date.now,
-  },
+  // joiningDate: {
+  //   type: Date,
+  //   default: Date.now,
+  // },
   nativeLanguage: {
     type: String,
   },

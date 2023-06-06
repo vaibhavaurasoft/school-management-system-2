@@ -1,7 +1,6 @@
 const experss = require("express");
 const router = experss.Router();
 const auth = require("../../middelwear/Auth");
-const StudentData = require("../../controller/teacher/addstudent");
 const Data = require("../../controller/userController/User")
 
 // add student
@@ -17,7 +16,6 @@ router
 router.route("/allstudent").get(
     auth.isAuthenticateUser,
     auth.authorizeRole("teacher",),
-    // StudentData.AllStudent
     Data.AllUser
 ) 
 
@@ -42,9 +40,6 @@ router.route("/deletestudent/:id").delete(
     Data.DeleteUser
 )
 
-// login user
-router.route("/login").post(
-    StudentData.studentLogin
-)
+
 
 module.exports = router

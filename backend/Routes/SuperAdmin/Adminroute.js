@@ -1,7 +1,6 @@
 const experss = require("express");
 const router = experss.Router();
 const auth = require("../../middelwear/Auth");
-// const AdminData = require("../../controller/superAdmin/addadmin");
 const Data = require("../../controller/userController/User")
 
 

@@ -1,6 +1,5 @@
 const TryCatch = require("../../middelwear/TryCatch");
 const User = require("../../model/User/User");
-const Admin = require("../../model/User/admin");
 const ErrorHandler = require("../../utils/errorHandel");
 const sendToken = require("../../utils/jwtToken");
 const ApiFeatures = require("../../utils/apifeature");
@@ -8,15 +7,25 @@ const checkPostBody = require("../../utils/QueryCheck");
 
 // create user
 const AddUser = TryCatch(async (req, res, next) => {
-  const role = req.user.role;
-  if (role === "super admin") {
-    await checkPostBody(["email", "password"], req);
-  } else if (role === "admin") {
-    await checkPostBody(["email", "password"], req);
-  } else if (role === "teacher") {
-    await checkPostBody(["email", "password"], req);
+  //   const role = req.user.role;
+  //  if (role === "super admin") {
+  //  return   await checkPostBody(["email", "password"], req);
+  //   } else if (role === "admin") {
+  //    return await checkPostBody(["email", "password"], req);
+  //   } else if (role === "teacher") {
+  //    return await checkPostBody(["email", "password"], req);
+  //   }
+  //   else if (!role) {
+  //     await User.create(req.body);
+  //   }
+  const exist = req.user.role;
+  if (exist === "superadmin") {
+    var user = await User.create(req.body);
+  } else {
+    req.body.CreateByuser = req.user.id;
+    req.body.schoolId = req.user.schoolId;
+    var user = await User.create(req.body);
   }
-  const user = await User.create(req.body);
 
   res.status(201).json({
     success: true,
@@ -27,8 +36,8 @@ const AddUser = TryCatch(async (req, res, next) => {
 // get user by id
 const UserbyId = TryCatch(async (req, res, next) => {
   const user = await User.findById(req.params.id);
-  const user2 = await Admin.findById(req.params.id);
-  if (!user && !user2) {
+  // const user2 = await Admin.findById(req.params.id);
+  if (!user) {
     return next(new ErrorHandler("user not found", 404));
   }
   res.status(200).json({
@@ -38,23 +47,24 @@ const UserbyId = TryCatch(async (req, res, next) => {
   });
 });
 
-// get all list
+// get all use
 const AllUser = TryCatch(async (req, res) => {
   // for super admin
   if (req.user.role == "superadmin") {
     const query = req.query;
     const data = await User.find(query);
-    const admin = await Admin.find(query);
     const totalUser = data.length;
-    res.status(200).json({ totalUser: totalUser, data, admin });
+    res.status(200).json({ totalUser: totalUser, data });
   }
 
   //  for admin / owner
   else if (req.user.role === "admin") {
     const query = req.query;
+    const schoolId = req.user.schoolId;
     const roleFilter = ["admin", "principal", "teacher", "student"];
     const searchQuery = {
       role: { $in: roleFilter },
+      schoolId,
       ...query,
     };
 
@@ -67,9 +77,11 @@ const AllUser = TryCatch(async (req, res) => {
   //  for principal / teacher
   else if (req.user.role == "principal") {
     const query = req.query;
+    const schoolId = req.user.schoolId;
     const roleFilter = ["principal", "teacher", "student"];
     const searchQuery = {
       role: { $in: roleFilter },
+      schoolId,
       ...query,
     };
 
@@ -81,9 +93,11 @@ const AllUser = TryCatch(async (req, res) => {
   //  for student
   else if (req.user.role == "teacher") {
     const query = req.query;
+    const schoolId = req.user.schoolId;
     const roleFilter = ["teacher", "student"];
     const searchQuery = {
       role: { $in: roleFilter },
+      schoolId,
       ...query,
     };
 
@@ -92,15 +106,6 @@ const AllUser = TryCatch(async (req, res) => {
 
     res.status(200).json({ totalUser, data });
   }
-});
-
-// get single user
-const SingleUser = TryCatch(async (req, res, next) => {
-  const user = await User.findById(req.params.id);
-  if (!user) {
-    return next(new ErrorHandler(`User Not Found`, 404));
-  }
-  res.status(200).json(user);
 });
 
 // update user

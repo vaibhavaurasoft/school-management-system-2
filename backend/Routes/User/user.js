@@ -4,7 +4,7 @@ const User = require("../../controller/userController/User");
 const auth = require("../../middelwear/Auth");
 
 // route for super Admin
-router.route("/register").post( auth.isAuthenticateUser,auth.authorizeRole("superadmin"), User.AddUser);
+router.route("/register").post(User.AddUser);
 router.route("/login").post(User.UserLogin);
 router
   .route("/userbyId/:id")
